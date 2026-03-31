@@ -14,7 +14,7 @@ import sys
 
  
 
-def ziskej_link_mest(polivka, zakladni_url):
+def ziskej_link_mest(polivka, zakladni_url): # Funkce projde postupně tagy odkazujicí na url odkazy jednotlivých měst v okrese a následně vrátí seznam linků těchto obcí.
 
     mesta = []
 
@@ -32,7 +32,7 @@ def ziskej_link_mest(polivka, zakladni_url):
         
        
 
-def vytvoreni_hlavicky(polivka, zakladni_url):
+def vytvoreni_hlavicky(polivka, zakladni_url): # Funkce pro vytvoření hlavičky výsledného souboru, funkce použije předepsaný seznam, obsahující prvních 5 hodnot a následně k ním přidá politické strany z tabulky.
 
     hlavicka = ["kód obce", "název obce", "voliči v seznamu", "vydané obálky", "platné hlasy"]
 
@@ -49,7 +49,7 @@ def vytvoreni_hlavicky(polivka, zakladni_url):
   
     return hlavicka
 
-def ziskej_data_obci(linky_obci):
+def ziskej_data_obci(linky_obci): # funkce navštíví každý link obce získaný pomocí funkce ziskej_link_mest() a následně si z něj vybere všechna potřebná data a uloží je jako řádek do seznamu, který se nahraje do proměnné vysledny_seznam, který i funkce po dokončení vrátí.
     vysledny_seznam = []
 
     for link in linky_obci:
@@ -90,7 +90,7 @@ def ziskej_data_obci(linky_obci):
 
 
 
-def main():
+def main(): # Hlavní funkce programu, která zkontroluje  správnost zadání vstupních argumentů a následně vyvolá funkce pro získání potřebných dat, ze kterých následně vytvoří CSV soubor 
     if len (sys.argv) != 3:
         print("\nŠpatně zadané hodnoty, prosím opakujte zadání")
         print("Fromát vstupu: python_soubor.py, URL, nazev_souboru.csv\n")
@@ -119,7 +119,6 @@ def main():
         hlavicka = vytvoreni_hlavicky(polivka, zakladni_url)
         data = ziskej_data_obci(linky_obci)
 
-        
         with open(vystupni_soubor, "w", newline="", encoding="utf-8-sig") as f:
             writer = csv.writer(f, delimiter=";")
             writer.writerow(hlavicka)
